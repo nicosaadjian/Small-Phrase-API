@@ -1,0 +1,9 @@
+armar una db postgresql desde un amazon rds en aws.
+
+usando node, armar las rutas con createRouter o lo que verga sea.
+
+la idea es que segun el endpoint y algun parametro, poder obtener alguna frase graciosa de los pibes.
+
+Como interactuo?
+
+desde app.js voy a querer tener una funcion que haga el fetch a rds y poder obtener la frase
