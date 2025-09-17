@@ -1,4 +1,4 @@
-const db = require('./src/config/db'); // tu conexión ya apuntando a frases_db
+const db = require('../config/db');
 
 async function createTable() {
     try {
