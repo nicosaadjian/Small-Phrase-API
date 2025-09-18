@@ -6,11 +6,48 @@
     <title>Prueba de API Frases</title>
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Lista sin bullets */
+        #phrase-container-ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        /* Estilo para friendName en negrita */
+        .friend-name {
+            font-weight: bold;
+        }
+
+        /* Estilo para frases en cursiva y entre comillas */
+        .phrase-text {
+            font-style: italic;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
+
+        body.dark-mode .card {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+        }
+
+        body.dark-mode .btn {
+            border: 1px solid #f0f0f0;
+        }
+    </style>
 </head>
 <body class="bg-light">
 
 <div class="container py-5">
     <h1 class="mb-4 text-center">API de Frases</h1>
+
+    <!-- Botón Dark Mode -->
+    <div class="text-end mb-3">
+        <button id="dark-mode-btn" class="btn btn-outline-dark">Modo Oscuro</button>
+    </div>
 
     <!-- Form para agregar frase -->
     <div class="card mb-4 shadow-sm">
@@ -33,7 +70,7 @@
     <!-- Lista de frases -->
     <div class="card shadow-sm">
         <div class="card-body">
-            <ul id="phrase-container-ul" class="list-group"></ul>
+            <ul id="phrase-container-ul"></ul>
         </div>
     </div>
 </div>
@@ -43,10 +80,15 @@
 <script src="front.js"></script>
 
 <script>
+    // Función para alternar Dark Mode
+    document.getElementById('dark-mode-btn').addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+    });
+
     // Botón para refrescar frases
     document.getElementById('refresh-btn').addEventListener('click', async () => {
-        const divPhrases = document.getElementById('phrase-container-ul');
-        divPhrases.innerHTML = ''; // limpiar lista
+        const ul = document.getElementById('phrase-container-ul');
+        ul.innerHTML = ''; // limpiar lista
         document.getElementById('friendName').value = '';
         document.getElementById('phrase').value = '';
         await renderPhrase();
@@ -64,9 +106,20 @@
         await renderPhrase();
     });
 
+    // Renderizar frases: agregar clases para friendName y phrase
+    async function renderPhrase() {
+        const ul = document.getElementById('phrase-container-ul');
+        const phrases = await fetchPhrases(); // tu función de front.js
+        phrases.forEach(item => {
+            const li = document.createElement('li');
+            li.classList.add('mb-2');
+            li.innerHTML = `<span class="friend-name">${item.friendName}</span>: "<span class="phrase-text">${item.phrase}</span>"`;
+            ul.appendChild(li);
+        });
+    }
+
     // Cargar frases al iniciar la página
     window.addEventListener('load', renderPhrase);
-    
 </script>
 </body>
 </html>
