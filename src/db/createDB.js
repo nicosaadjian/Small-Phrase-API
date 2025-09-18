@@ -1,3 +1,6 @@
+// los scripts de creacion de db y tablas son para gestion de la DB.
+// nunca van a ser utilizados por el front ni el back
+
 const db = require('../config/db');
 
 async function createDatabase() {

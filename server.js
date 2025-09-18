@@ -1,3 +1,5 @@
+// el script del server tiene que irse a AWS para tener la app corriendo 'serverless' (??)
+
 const express = require('express');
 const cors = require('cors');
 const app = express();

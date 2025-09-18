@@ -23,4 +23,5 @@ async function insertData() {
     process.exit();
 }
 
-insertData();
+// insertData();
+// este insertData es el que quiero que sea el post de mi frontend
