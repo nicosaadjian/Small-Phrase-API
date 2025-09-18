@@ -1,4 +1,4 @@
-const pgp = require('pg-promise')
+const pgp = require('pg-promise')(/*options*/)
 
 const cn = {
     host: 'database-2.cngkigmm2sd1.us-east-2.rds.amazonaws.com',
