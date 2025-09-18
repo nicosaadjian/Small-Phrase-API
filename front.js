@@ -1,5 +1,7 @@
 // const endpoint = 'https://mi-ec2-public-url/api/frases';
-const endpoint = 'http://18.222.25.162:3000/api/frases';
+// const endpoint = 'http://18.222.25.162:3000/api/frases';
+const endpoint = 'https://5858440034c3.ngrok-free.app/api/frases';
+
 
 async function getPhrases() {
     try {
