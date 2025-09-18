@@ -30,7 +30,9 @@ async function renderPhrase() {
 
     data.forEach(f => {
         const li = document.createElement('li');
-        li.textContent = `${f.friendName}: ${f.phrase}`;
+        li.textContent = `${f.friend_name}: ${f.phrase}`;
         divPhrases.appendChild(li);
     });
 }
+
+

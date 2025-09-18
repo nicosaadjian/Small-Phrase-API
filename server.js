@@ -26,7 +26,7 @@ async function getPhrases() {
 
 async function postPhrases(friendName, phrase) {
     try {
-        await db.none('INSERT INTO frases(friendName, phrase) VALUES($1, $2)', [friendName, phrase]);
+        await db.none('INSERT INTO frases(friend_name, phrase) VALUES($1, $2)', [friendName, phrase]);
         return { message: 'Frase agregada correctamente' };
     } catch (err) {
         console.error('Error agregando frase:', err);
@@ -57,9 +57,11 @@ app.post('/api/frases', async (req, res) => {
         const result = await postPhrases(friendName, phrase);
         res.status(201).json(result);
     } catch (err) {
+        console.error('Error en POST /api/frases:', err.message);
         res.status(500).json({ error: 'Error al agregar la frase' });
     }
 });
+
 
 // --- Levantar servidor ---
 app.listen(port, () => {

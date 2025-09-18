@@ -47,6 +47,8 @@
     document.getElementById('refresh-btn').addEventListener('click', async () => {
         const divPhrases = document.getElementById('phrase-container-ul');
         divPhrases.innerHTML = ''; // limpiar lista
+        document.getElementById('friendName').value = '';
+        document.getElementById('phrase').value = '';
         await renderPhrase();
     });
 
@@ -64,6 +66,7 @@
 
     // Cargar frases al iniciar la página
     window.addEventListener('load', renderPhrase);
+    
 </script>
 </body>
 </html>
