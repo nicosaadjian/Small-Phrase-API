@@ -4,17 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba de API Frases</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <form id="add-phrase-form">
-        <input type="text" id="friendName" placeholder="Nombre del amigo" required>
-        <input type="text" id="phrase" placeholder="Frase" required>
-        <button type="submit">Agregar frase</button>
-        
-    </form>
-    <div id="phrase-container">
-        <ul id="phrase-container-ul"></ul>
+<body class="bg-light">
+
+<div class="container py-5">
+    <h1 class="mb-4 text-center">API de Frases</h1>
+
+    <!-- Form para agregar frase -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form id="add-phrase-form" class="row g-3">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="friendName" placeholder="Nombre del amigo" required>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" id="phrase" placeholder="Frase" required>
+                </div>
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary">Agregar frase</button>
+                    <button type="button" id="refresh-btn" class="btn btn-secondary">Refrescar frases</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <script src="front.js"></script>
+
+    <!-- Lista de frases -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <ul id="phrase-container-ul" class="list-group"></ul>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="front.js"></script>
+
+<script>
+    // Botón para refrescar frases
+    document.getElementById('refresh-btn').addEventListener('click', async () => {
+        const divPhrases = document.getElementById('phrase-container-ul');
+        divPhrases.innerHTML = ''; // limpiar lista
+        await renderPhrase();
+    });
+
+    // Al enviar el form, agregar frase y refrescar
+    document.getElementById('add-phrase-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const friendName = document.getElementById('friendName').value;
+        const phrase = document.getElementById('phrase').value;
+        await postPhrase(friendName, phrase);
+        document.getElementById('friendName').value = '';
+        document.getElementById('phrase').value = '';
+        document.getElementById('phrase-container-ul').innerHTML = '';
+        await renderPhrase();
+    });
+
+    // Cargar frases al iniciar la página
+    window.addEventListener('load', renderPhrase);
+</script>
 </body>
 </html>
