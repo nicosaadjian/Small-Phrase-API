@@ -39,12 +39,28 @@ async function postPhrase(friendName, phrase) {
 async function renderPhrase() {
     const data = await getPhrases();
     const divPhrases = document.getElementById('phrase-container-ul');
+    divPhrases.innerHTML = ''; // limpiar lista antes de renderizar
 
     data.forEach(f => {
         const li = document.createElement('li');
-        li.textContent = `${f.friend_name}: ${f.phrase}`;
+        li.classList.add('mb-2'); // opcional, separación entre items
+
+        // Crear span para friendName en negrita
+        const friendSpan = document.createElement('span');
+        friendSpan.textContent = f.friend_name;
+        friendSpan.style.fontWeight = 'bold'; // o usar friendSpan.classList.add('friend-name');
+
+        // Crear span para frase en cursiva y entre comillas
+        const phraseSpan = document.createElement('span');
+        phraseSpan.textContent = `"${f.phrase}"`;
+        phraseSpan.style.fontStyle = 'italic'; // o usar phraseSpan.classList.add('phrase-text');
+
+        // Combinar los spans en el li
+        li.appendChild(friendSpan);
+        li.appendChild(document.createTextNode(': ')); // separador
+        li.appendChild(phraseSpan);
+
+        // Agregar li al ul
         divPhrases.appendChild(li);
     });
 }
-
-
