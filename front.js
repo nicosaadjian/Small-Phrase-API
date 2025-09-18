@@ -5,7 +5,17 @@ const endpoint = 'https://5858440034c3.ngrok-free.app/api/frases';
 
 async function getPhrases() {
     try {
-        const response = await fetch(endpoint);
+        // const response = await fetch(endpoint);
+        const response = 
+        
+        await fetch(endpoint, {
+                method: 'GET', // o POST
+                headers: {
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': '69420'
+                }
+            });
+
         return await response.json();
     } catch(err) {
         console.error(err);
