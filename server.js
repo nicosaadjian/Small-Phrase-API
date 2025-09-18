@@ -38,7 +38,9 @@ async function postPhrases(friendName, phrase) {
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: '*' // temporal, para probar
+}));
 app.use(express.json());
 
 // --- Rutas ---
