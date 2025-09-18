@@ -1,5 +1,5 @@
 // const endpoint = 'https://mi-ec2-public-url/api/frases';
-const endpoint = 'https://18.222.25.162/api/frases';
+const endpoint = 'http://18.222.25.162/api/frases';
 
 async function getPhrases() {
     try {
